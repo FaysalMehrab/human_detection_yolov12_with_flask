@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Human Detection | Made by CSE Project HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Inter', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        header {
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        h1 {
+            color: #2e3a59;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #5e6c8c;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0;
+            letter-spacing: 0.5px;
+        }
+        #videoContainer {
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.22);
+            padding: 36px 36px 28px 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.3s;
+            max-width: 98vw;
+        }
+        #remoteVideo {
+            width: 480px;
+            height: 360px;
+            border-radius: 18px;
+            border: 2px solid #b5c6e0;
+            background: #f5f8fa;
+            box-shadow: 0 0 24px #b5c6e055;
+            margin-bottom: 28px;
+            object-fit: cover;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        #startBtn {
+            padding: 14px 38px;
+            font-size: 1.15rem;
+            font-family: 'Inter', Arial, sans-serif;
+            background: linear-gradient(90deg, #7fbcfb 0%, #e684ae 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 16px #b5c6e055;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+        }
+        #startBtn:hover {
+            background: linear-gradient(90deg, #e684ae 0%, #7fbcfb 100%);
+            color: #2e3a59;
+            box-shadow: 0 4px 24px #e684ae55;
+            transform: translateY(-2px) scale(1.03);
+        }
+        #startBtn:disabled {
+            background: #e0eafc;
+            color: #b5c6e0;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        #status {
+            font-size: 1.08rem;
+            color: #2e3a59;
+            font-family: 'Inter', Arial, sans-serif;
+            letter-spacing: 1px;
+            margin-top: 2px;
+            background: rgba(255,255,255,0.7);
+            padding: 8px 22px;
+            border-radius: 8px;
+            box-shadow: 0 1px 8px #b5c6e022;
+            min-width: 240px;
+            text-align: center;
+        }
+        footer {
+            margin-top: 36px;
+            color: #8fa1c7;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+            font-family: 'Inter', Arial, sans-serif;
+            opacity: 0.85;
+        }
+        @media (max-width: 700px) {
+            #remoteVideo {
+                width: 95vw;
+                height: 56vw;
+                min-height: 180px;
+            }
+            #videoContainer {
+                padding: 14px 4vw 14px 4vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Real-Time Human Detection</h1>
+        <div class="subtitle">Powered by YOLOv12 & WebRTC | CSE Project HUB</div>
+    </header>
+    <div id="videoContainer">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div id="controls">
+            <button id="startBtn">Start Detection</button>
+            <div id="status">Please wait 5-10 seconds for the model to load...</div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 CSE Project HUB &mdash; All rights reserved.
+    </footer>
+    <script src="/static/main.js"></script>
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const status = document.getElementById('status');
+        let isDetecting = false;
+
+        startBtn.addEventListener('click', () => {
+            if (!isDetecting) {
+                startBtn.textContent = 'Stop Detection';
+                status.textContent = 'Status: Connecting...';
+                createOffer(); // Call the function from main.js
+                isDetecting = true;
+            } else {
+                startBtn.textContent = 'Start Detection';
+                status.textContent = 'Status: Stopped';
+                // Add logic to stop the connection if needed
+                isDetecting = false;
+            }
+        });
+    </script>
+</body>
+</html>

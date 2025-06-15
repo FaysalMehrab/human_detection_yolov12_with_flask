@@ -18,14 +18,15 @@ Supports both live webcam detection and video file uploads.
 
 ## Demo
 
-![UI Screenshot](screenshot.png) <!-- Add your screenshot here -->
+
+![Screenshot (58)](https://github.com/user-attachments/assets/f7896047-a139-4114-bdf1-aba8dfa1d0c6)
 
 ---
 
 ## Requirements
 
 - Python 3.8+
-- [YOLOv8/YOLOv12 nano model](https://github.com/ultralytics/ultralytics) (`yolo12n.pt`)
+- [YOLOv12 nano model](https://github.com/ultralytics/ultralytics) (`yolo12n.pt`)
 - See [`requirements.txt`](requirements.txt) for Python dependencies
 
 ---

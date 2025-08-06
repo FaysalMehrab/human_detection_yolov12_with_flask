@@ -5,7 +5,7 @@ Built with Python, Flask, aiohttp, aiortc, and Ultralytics YOLO.
 Supports both live webcam detection and video file uploads.
 
 ---
-
+##Live Model: https://human-detection-yolov12-with-flask-br6t.onrender.com
 ## Features
 
 - **Real-time webcam human detection** (WebRTC, browser-based)
